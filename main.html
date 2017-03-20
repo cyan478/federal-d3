@@ -1,0 +1,71 @@
+<!-- 2009 data -->
+<!-- http://federal-budget.insidegov.com/l/112/2009 -->
+
+<!-- 2015 data -->
+<!-- http://federal-budget.insidegov.com/l/118/2015 --> 
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+    <title>D3 Intro</title>
+
+    <style>
+     .chart div {
+       font: 10px sans-serif;
+       background-color: steelblue;
+       text-align: right;
+       padding: 3px;
+       margin: 1px;
+       color: white;
+     }
+    </style>
+
+  </head>
+
+  <body>
+  
+    <center><h2>2009 United States Budget</h2></center>
+    <h3>Total Revenue</h3>
+    <div class="chart">
+      <div style="width: 3px;">3%</div>
+      <div style="width: 5px;">5%</div>
+      <div style="width: 7px;">7%</div>
+      <div style="width: 42px;">42%</div>
+      <div style="width: 43px;">43%</div>
+    </div>
+
+
+    <hr>
+    
+    <center><h2>2015 United States Budget</h2></center>
+    <div class="chart" id="dynamic">
+    </div>
+
+    <script>
+     var dyn = d3.select("#dynamic");
+     var info = [4, 8, 15, 16, 23, 42];
+     
+       
+    dyn.selectAll("div")
+    .data(info)
+    .enter()
+    .append("div")
+    .style("width", function(d) {return d + "px";})
+    .text( function(d) {return d;});
+    transitionTest(10)
+     
+    var transitionTest = function( scale ) {
+       dyn.selectAll("div")
+    	.data(info)
+    	.transition()
+    	.duration(2000)
+    	.style("width", function(d) {return d * scale + "px";})
+    	.text( function(d) {return d;})
+    };
+     
+    </script>
+
+  </body>
+</html>
