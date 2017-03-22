@@ -8,13 +8,13 @@
 
 <html>
   <head>
-    <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+    <script src="d3.min.js" charset="utf-8"></script>
     <title>D3 Intro</title>
 
     <style>
      .chart div {
        font: 10px sans-serif;
-       background-color: steelblue;
+       background-color: pink;
        text-align: right;
        padding: 3px;
        margin: 1px;
@@ -27,60 +27,60 @@
   <body>
   
     <center><h2>2009 United States Budget</h2></center>
-    <h3>Total Revenue</h3>
-    <div class="chart">
-      Excise taxes
-      <div style="width: 3px;">3%</div>
-      Corporate Income Taxes
-      <div style="width: 7px;">7%</div>
-      Payroll Taxes
-      <div style="width: 42px;">42%</div>
-      Individual Income Taxes
-      <div style="width: 43px;">43%</div>
-      Other taxes
-      <div style="width: 5px;">5%</div>
+    <h3>Percent of Total Revenue </h3>
+    <div class="chart" id="us2016">
+      Excise taxes  <br>
+      Corporate Income Taxes <br>
+      Payroll Taxes <br>
+      Individual Income Taxes <br>
+      Other taxes <br>
     </div>
 
 
     <hr>
     
     <center><h2>2015 United States Budget</h2></center>
-    <h3>Total Revenue</h3>
-    <div class="chart">
-      Excise taxes 
-      <div style="width: 3px;">3%</div> 
-      Corporate Income Taxes 
-      <div style="width: 7px;">11%</div>
-      Payroll Taxes 
-      <div style="width: 42px;">33%</div>
-      Individual Income Taxes 
-      <div style="width: 43px;">47%</div>
-      Other taxes 
-      <div style="width: 5px;">6%</div>
+    <h3>Percent of Total Revenue</h3>
+
+    <div class="chart" id="us2015">
+      Excise taxes  <br>
+      Corporate Income Taxes <br>
+      Payroll Taxes <br>
+      Individual Income Taxes <br>
+      Other taxes <br>
     </div>
 
     <script>
-     var dyn = d3.select("#dynamic");
-     var info = [4, 8, 15, 16, 23, 42];
-     
+      var dyn = d3.select("#us2015");
+      var dyn2 = d3.select("#us2016");
+      var info = [3,11,33,47,6];
+      var info2 = [3,7,42,43,5]
        
-    dyn.selectAll("div")
-    .data(info)
-    .enter()
-    .append("div")
-    .style("width", function(d) {return d + "px";})
-    .text( function(d) {return d;});
-    transitionTest(10)
-     
-    var transitionTest = function( scale ) {
-       dyn.selectAll("div")
-    	.data(info)
-    	.transition()
-    	.duration(2000)
-    	.style("width", function(d) {return d * scale + "px";})
-    	.text( function(d) {return d;})
-    };
-     
+      var transitionTest = function( scale ) {
+         dyn.selectAll("div")
+        .data(info)
+        .enter()
+        .append("div")
+        .style("width",0)
+        .transition()
+        .duration(2000)
+        .style("width", function(d) {return d * scale + "px";})
+        .text( function(d) {return d;})
+      };
+      var transitionTest2 = function( scale ) {
+         dyn2.selectAll("div")
+        .data(info2)
+        .enter()
+        .append("div")
+        .style("width",0)
+        .transition()
+        .duration(2000)
+        .style("width", function(d) {return d * scale + "px";})
+        .text( function(d) {return d;})
+      };
+
+      transitionTest(20); 
+      transitionTest2(20);  
     </script>
 
   </body>
